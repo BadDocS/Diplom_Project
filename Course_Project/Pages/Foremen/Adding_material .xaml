@@ -1,0 +1,42 @@
+﻿<Window x:Class="Course_Project.Pages.Foremen.Adding_material"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Course_Project.Pages.Foremen"
+        mc:Ignorable="d"
+        Title="Adding_material"  Height="350" Width="375" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Grid Style="{StaticResource WindowGrid}" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.15*" />
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="0.3*"/>
+        </Grid.RowDefinitions>
+        <ComboBox Name="CmbUch" IsEnabled="False" Visibility="Hidden" Grid.Row="1"/>
+
+        <TextBlock HorizontalAlignment="Center" FontSize="16">Добавление новой записи:</TextBlock>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,20">
+            <Button Style="{StaticResource CancelBtn}"  IsCancel="True" HorizontalAlignment="Left" Margin="25 0 0 0">Отмена</Button>
+            <Button IsEnabled="False" Style="{StaticResource AcceptBtn}" x:Name="btnAccept" Click="Accept_Click" HorizontalAlignment="Right" Margin="20,0,0,0" Cursor="Hand">Подтвердить</Button>
+        </StackPanel>
+        
+
+        <TextBox x:Name="Txbkolvo" Width="150" Height="30" HorizontalAlignment="Right"
+                 TextChanged="Txbkolvo_TextChanged" Grid.Row="1" Margin="0,0,10,0"
+                 PreviewTextInput="Txbkolvo_PreviewTextInput" VerticalAlignment="Center" Cursor="IBeam"/>
+        
+        <TextBlock Grid.Row="1" Text="Введите количество" Margin="10,0,0,0"
+                   HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16"/>
+
+        <ComboBox x:Name="CmbMat" Grid.Row="1" Width="150" Height="30" 
+            HorizontalAlignment="Right" VerticalAlignment="Center" 
+            Margin="0,0,10,100" SelectionChanged="CmbMat_SelectionChanged"/>
+            
+        <TextBlock Grid.Row="1" Text="Выберите материал" 
+                   HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,0,100" FontSize="16" 
+                   />
+        
+        <Label x:Name="ed_izm" Foreground="Black" Content="" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Center" Margin="0,0,0,0" Width="30"/>
+    </Grid>
+</Window>

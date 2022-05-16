@@ -1,0 +1,38 @@
+﻿<Window x:Class="Course_Project.Pages.Directories.Workshops"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Course_Project.Pages.Directories"
+        mc:Ignorable="d"
+        Title="Информация об участке" Height="300" Width="400" WindowStartupLocation="CenterScreen">
+    <Grid Style="{StaticResource WindowGrid}" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.15*" />
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="20" FontFamily="Bahnschrift" Margin="0,10,0,0">Рабочий участок</TextBlock>
+        <Image Grid.Row="1" Source="/Resources/Person.png" Width="150" Height="150" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <StackPanel Orientation="Vertical" Grid.Row="1" Width="250" HorizontalAlignment="Right">
+            <StackPanel Orientation="Horizontal">
+                <Label Style="{StaticResource DarlLabel}" VerticalAlignment="Center" Width="130" >Наименование:</Label>
+                <TextBlock x:Name="TbTitle" FontSize="16" Width="120" Height="30" VerticalAlignment="Center" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,25,0,0">
+                <Label Style="{StaticResource DarlLabel}" VerticalAlignment="Center" Width="100" >Начальник:</Label>
+                <TextBlock x:Name="TbBoss" FontSize="16" Width="120" Height="30"  VerticalAlignment="Center" Margin="30,0,0,0" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,25,0,0">
+                <Label Style="{StaticResource DarlLabel}" VerticalAlignment="Center" Width="100" >Тип участка</Label>
+                <TextBlock x:Name="TbType"  FontSize="16" Width="120" Height="30"  VerticalAlignment="Center" Margin="30,0,0,0" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,25,0,0">
+                <Label Style="{StaticResource DarlLabel}" VerticalAlignment="Center" Width="150" >Работники участка</Label>
+                <Button x:Name="BtnWorkers" Width="40" Margin="30,0,0,0" Click="BtnWorkers_Click"  Cursor="Hand">
+                    <Image Source="/Resources/Arrow.png"/>
+                </Button>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

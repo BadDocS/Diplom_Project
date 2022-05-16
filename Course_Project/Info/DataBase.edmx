@@ -1,0 +1,886 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище ТрансмашModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Materials">
+          <Key>
+            <PropertyRef Name="idMat" />
+          </Key>
+          <Property Name="idMat" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Material_num" Type="int" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" />
+          <Property Name="Unit_m" Type="nchar" MaxLength="10" />
+          <Property Name="Irreducible_balance" Type="int" />
+          <Property Name="Min_packing" Type="float" />
+          <Property Name="Max_packing" Type="float" />
+          <Property Name="Supplier" Type="nvarchar" MaxLength="25" />
+        </EntityType>
+        <EntityType Name="Month">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="idOrder" />
+          </Key>
+          <Property Name="idOrder" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Work_cod" Type="int" />
+          <Property Name="Material_num" Type="int" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="Month" Type="int" />
+          <Property Name="Year" Type="int" />
+        </EntityType>
+        <EntityType Name="Position">
+          <Key>
+            <PropertyRef Name="idPos" />
+          </Key>
+          <Property Name="idPos" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Templates">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="id_area" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TOrders">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Temp_num" Type="int" Nullable="false" />
+          <Property Name="Material_num" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="idUsers" />
+          </Key>
+          <Property Name="idUsers" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Login" Type="varchar" MaxLength="20" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="id_area" Type="int" />
+        </EntityType>
+        <EntityType Name="Warehouse">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Material_cod" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" />
+        </EntityType>
+        <EntityType Name="Work_Areas">
+          <Key>
+            <PropertyRef Name="Workshop_code" />
+          </Key>
+          <Property Name="Workshop_code" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="35" />
+          <Property Name="Supervisor" Type="nvarchar" MaxLength="20" />
+          <Property Name="Type_work" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Workers">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="15" />
+          <Property Name="Name" Type="nvarchar" MaxLength="15" />
+          <Property Name="Mid_name" Type="nvarchar" MaxLength="15" />
+          <Property Name="Pos_work" Type="int" />
+          <Property Name="Area_work" Type="int" />
+          <Property Name="FIO" Type="nvarchar" MaxLength="47" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "Трансмаш.dbo.General_order" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="General_order">
+          <Key>
+            <PropertyRef Name="idMat" />
+          </Key>
+          <Property Name="idMat" Type="int" Nullable="false" />
+          <Property Name="Material_num" Type="int" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" />
+          <Property Name="Unit_m" Type="nchar" MaxLength="10" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="Month" Type="int" />
+          <Property Name="Year" Type="int" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "Трансмаш.dbo.Order_view" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="Order_view">
+          <Key>
+            <PropertyRef Name="idMat" />
+            <PropertyRef Name="Quantity" />
+          </Key>
+          <Property Name="idMat" Type="int" Nullable="false" />
+          <Property Name="Material_num" Type="int" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" />
+          <Property Name="Unit_m" Type="nchar" MaxLength="10" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="Work_cod" Type="int" />
+          <Property Name="Month" Type="int" />
+          <Property Name="Year" Type="int" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "Трансмаш.dbo.Purchase_view" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="Purchase_view">
+          <Key>
+            <PropertyRef Name="idMat" />
+          </Key>
+          <Property Name="idMat" Type="int" Nullable="false" />
+          <Property Name="Material_num" Type="int" />
+          <Property Name="Unit_m" Type="nchar" MaxLength="10" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="Month" Type="int" />
+          <Property Name="Year" Type="int" />
+        </EntityType>
+        <Association Name="FK_Orders_Materials">
+          <End Role="Materials" Type="Self.Materials" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Materials">
+              <PropertyRef Name="idMat" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="Material_num" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Month">
+          <End Role="Month" Type="Self.Month" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Month">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="Month" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Work_Areas1">
+          <End Role="Work_Areas" Type="Self.Work_Areas" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Work_Areas">
+              <PropertyRef Name="Workshop_code" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="Work_cod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Templates_Work_Areas">
+          <End Role="Work_Areas" Type="Self.Work_Areas" Multiplicity="1" />
+          <End Role="Templates" Type="Self.Templates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Work_Areas">
+              <PropertyRef Name="Workshop_code" />
+            </Principal>
+            <Dependent Role="Templates">
+              <PropertyRef Name="id_area" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TOrders_Materials">
+          <End Role="Materials" Type="Self.Materials" Multiplicity="1" />
+          <End Role="TOrders" Type="Self.TOrders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Materials">
+              <PropertyRef Name="idMat" />
+            </Principal>
+            <Dependent Role="TOrders">
+              <PropertyRef Name="Material_num" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TOrders_Templates">
+          <End Role="Templates" Type="Self.Templates" Multiplicity="1" />
+          <End Role="TOrders" Type="Self.TOrders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Templates">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TOrders">
+              <PropertyRef Name="Temp_num" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Work_Areas">
+          <End Role="Work_Areas" Type="Self.Work_Areas" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Work_Areas">
+              <PropertyRef Name="Workshop_code" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="id_area" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Warehouse_Materials1">
+          <End Role="Materials" Type="Self.Materials" Multiplicity="1" />
+          <End Role="Warehouse" Type="Self.Warehouse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Materials">
+              <PropertyRef Name="idMat" />
+            </Principal>
+            <Dependent Role="Warehouse">
+              <PropertyRef Name="Material_cod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Workers_Position1">
+          <End Role="Position" Type="Self.Position" Multiplicity="0..1" />
+          <End Role="Workers" Type="Self.Workers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Position">
+              <PropertyRef Name="idPos" />
+            </Principal>
+            <Dependent Role="Workers">
+              <PropertyRef Name="Pos_work" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Workers_Work_Areas">
+          <End Role="Work_Areas" Type="Self.Work_Areas" Multiplicity="0..1" />
+          <End Role="Workers" Type="Self.Workers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Work_Areas">
+              <PropertyRef Name="Workshop_code" />
+            </Principal>
+            <Dependent Role="Workers">
+              <PropertyRef Name="Area_work" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище ТрансмашModelContainer">
+          <EntitySet Name="Materials" EntityType="Self.Materials" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Month" EntityType="Self.Month" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Position" EntityType="Self.Position" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Templates" EntityType="Self.Templates" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TOrders" EntityType="Self.TOrders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Warehouse" EntityType="Self.Warehouse" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Work_Areas" EntityType="Self.Work_Areas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Workers" EntityType="Self.Workers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="General_order" EntityType="Self.General_order" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [General_order].[idMat] AS [idMat], 
+    [General_order].[Material_num] AS [Material_num], 
+    [General_order].[Title] AS [Title], 
+    [General_order].[Unit_m] AS [Unit_m], 
+    [General_order].[Quantity] AS [Quantity], 
+    [General_order].[Month] AS [Month], 
+    [General_order].[Year] AS [Year]
+    FROM [dbo].[General_order] AS [General_order]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Order_view" EntityType="Self.Order_view" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Order_view].[idMat] AS [idMat], 
+    [Order_view].[Material_num] AS [Material_num], 
+    [Order_view].[Title] AS [Title], 
+    [Order_view].[Unit_m] AS [Unit_m], 
+    [Order_view].[Quantity] AS [Quantity], 
+    [Order_view].[Work_cod] AS [Work_cod], 
+    [Order_view].[Month] AS [Month], 
+    [Order_view].[Year] AS [Year]
+    FROM [dbo].[Order_view] AS [Order_view]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Purchase_view" EntityType="Self.Purchase_view" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Purchase_view].[idMat] AS [idMat], 
+    [Purchase_view].[Material_num] AS [Material_num], 
+    [Purchase_view].[Unit_m] AS [Unit_m], 
+    [Purchase_view].[Title] AS [Title], 
+    [Purchase_view].[Quantity] AS [Quantity], 
+    [Purchase_view].[Month] AS [Month], 
+    [Purchase_view].[Year] AS [Year]
+    FROM [dbo].[Purchase_view] AS [Purchase_view]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Orders_Materials" Association="Self.FK_Orders_Materials">
+            <End Role="Materials" EntitySet="Materials" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Month" Association="Self.FK_Orders_Month">
+            <End Role="Month" EntitySet="Month" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Work_Areas1" Association="Self.FK_Orders_Work_Areas1">
+            <End Role="Work_Areas" EntitySet="Work_Areas" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Templates_Work_Areas" Association="Self.FK_Templates_Work_Areas">
+            <End Role="Work_Areas" EntitySet="Work_Areas" />
+            <End Role="Templates" EntitySet="Templates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TOrders_Materials" Association="Self.FK_TOrders_Materials">
+            <End Role="Materials" EntitySet="Materials" />
+            <End Role="TOrders" EntitySet="TOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TOrders_Templates" Association="Self.FK_TOrders_Templates">
+            <End Role="Templates" EntitySet="Templates" />
+            <End Role="TOrders" EntitySet="TOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Work_Areas" Association="Self.FK_User_Work_Areas">
+            <End Role="Work_Areas" EntitySet="Work_Areas" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Warehouse_Materials1" Association="Self.FK_Warehouse_Materials1">
+            <End Role="Materials" EntitySet="Materials" />
+            <End Role="Warehouse" EntitySet="Warehouse" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Workers_Position1" Association="Self.FK_Workers_Position1">
+            <End Role="Position" EntitySet="Position" />
+            <End Role="Workers" EntitySet="Workers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Workers_Work_Areas" Association="Self.FK_Workers_Work_Areas">
+            <End Role="Work_Areas" EntitySet="Work_Areas" />
+            <End Role="Workers" EntitySet="Workers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ТрансмашModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ТрансмашEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Materials" EntityType="ТрансмашModel.Materials" />
+          <EntitySet Name="Month" EntityType="ТрансмашModel.Month" />
+          <EntitySet Name="Orders" EntityType="ТрансмашModel.Orders" />
+          <EntitySet Name="Position" EntityType="ТрансмашModel.Position" />
+          <EntitySet Name="sysdiagrams" EntityType="ТрансмашModel.sysdiagrams" />
+          <EntitySet Name="Templates" EntityType="ТрансмашModel.Templates" />
+          <EntitySet Name="TOrders" EntityType="ТрансмашModel.TOrders" />
+          <EntitySet Name="User" EntityType="ТрансмашModel.User" />
+          <EntitySet Name="Warehouse" EntityType="ТрансмашModel.Warehouse" />
+          <EntitySet Name="Work_Areas" EntityType="ТрансмашModel.Work_Areas" />
+          <EntitySet Name="Workers" EntityType="ТрансмашModel.Workers" />
+          <EntitySet Name="General_order" EntityType="ТрансмашModel.General_order" />
+          <EntitySet Name="Order_view" EntityType="ТрансмашModel.Order_view" />
+          <EntitySet Name="Purchase_view" EntityType="ТрансмашModel.Purchase_view" />
+          <AssociationSet Name="FK_Orders_Materials" Association="ТрансмашModel.FK_Orders_Materials">
+            <End Role="Materials" EntitySet="Materials" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TOrders_Materials" Association="ТрансмашModel.FK_TOrders_Materials">
+            <End Role="Materials" EntitySet="Materials" />
+            <End Role="TOrders" EntitySet="TOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Warehouse_Materials1" Association="ТрансмашModel.FK_Warehouse_Materials1">
+            <End Role="Materials" EntitySet="Materials" />
+            <End Role="Warehouse" EntitySet="Warehouse" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Month" Association="ТрансмашModel.FK_Orders_Month">
+            <End Role="Month" EntitySet="Month" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Work_Areas1" Association="ТрансмашModel.FK_Orders_Work_Areas1">
+            <End Role="Work_Areas" EntitySet="Work_Areas" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Workers_Position1" Association="ТрансмашModel.FK_Workers_Position1">
+            <End Role="Position" EntitySet="Position" />
+            <End Role="Workers" EntitySet="Workers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Templates_Work_Areas" Association="ТрансмашModel.FK_Templates_Work_Areas">
+            <End Role="Work_Areas" EntitySet="Work_Areas" />
+            <End Role="Templates" EntitySet="Templates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TOrders_Templates" Association="ТрансмашModel.FK_TOrders_Templates">
+            <End Role="Templates" EntitySet="Templates" />
+            <End Role="TOrders" EntitySet="TOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Work_Areas" Association="ТрансмашModel.FK_User_Work_Areas">
+            <End Role="Work_Areas" EntitySet="Work_Areas" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Workers_Work_Areas" Association="ТрансмашModel.FK_Workers_Work_Areas">
+            <End Role="Work_Areas" EntitySet="Work_Areas" />
+            <End Role="Workers" EntitySet="Workers" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Materials">
+          <Key>
+            <PropertyRef Name="idMat" />
+          </Key>
+          <Property Name="idMat" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Material_num" Type="Int32" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Unit_m" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Irreducible_balance" Type="Int32" />
+          <Property Name="Min_packing" Type="Double" />
+          <Property Name="Max_packing" Type="Double" />
+          <Property Name="Supplier" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Orders" Relationship="ТрансмашModel.FK_Orders_Materials" FromRole="Materials" ToRole="Orders" />
+          <NavigationProperty Name="TOrders" Relationship="ТрансмашModel.FK_TOrders_Materials" FromRole="Materials" ToRole="TOrders" />
+          <NavigationProperty Name="Warehouse" Relationship="ТрансмашModel.FK_Warehouse_Materials1" FromRole="Materials" ToRole="Warehouse" />
+        </EntityType>
+        <EntityType Name="Month">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Orders" Relationship="ТрансмашModel.FK_Orders_Month" FromRole="Month" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="idOrder" />
+          </Key>
+          <Property Name="idOrder" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Work_cod" Type="Int32" />
+          <Property Name="Material_num" Type="Int32" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="Month" Type="Int32" />
+          <Property Name="Year" Type="Int32" />
+          <NavigationProperty Name="Materials" Relationship="ТрансмашModel.FK_Orders_Materials" FromRole="Orders" ToRole="Materials" />
+          <NavigationProperty Name="Month1" Relationship="ТрансмашModel.FK_Orders_Month" FromRole="Orders" ToRole="Month" />
+          <NavigationProperty Name="Work_Areas" Relationship="ТрансмашModel.FK_Orders_Work_Areas1" FromRole="Orders" ToRole="Work_Areas" />
+        </EntityType>
+        <EntityType Name="Position">
+          <Key>
+            <PropertyRef Name="idPos" />
+          </Key>
+          <Property Name="idPos" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Workers" Relationship="ТрансмашModel.FK_Workers_Position1" FromRole="Position" ToRole="Workers" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Templates">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="id_area" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Work_Areas" Relationship="ТрансмашModel.FK_Templates_Work_Areas" FromRole="Templates" ToRole="Work_Areas" />
+          <NavigationProperty Name="TOrders" Relationship="ТрансмашModel.FK_TOrders_Templates" FromRole="Templates" ToRole="TOrders" />
+        </EntityType>
+        <EntityType Name="TOrders">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Temp_num" Type="Int32" Nullable="false" />
+          <Property Name="Material_num" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Materials" Relationship="ТрансмашModel.FK_TOrders_Materials" FromRole="TOrders" ToRole="Materials" />
+          <NavigationProperty Name="Templates" Relationship="ТрансмашModel.FK_TOrders_Templates" FromRole="TOrders" ToRole="Templates" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="idUsers" />
+          </Key>
+          <Property Name="idUsers" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Login" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="id_area" Type="Int32" />
+          <NavigationProperty Name="Work_Areas" Relationship="ТрансмашModel.FK_User_Work_Areas" FromRole="User" ToRole="Work_Areas" />
+        </EntityType>
+        <EntityType Name="Warehouse">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Material_cod" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" />
+          <NavigationProperty Name="Materials" Relationship="ТрансмашModel.FK_Warehouse_Materials1" FromRole="Warehouse" ToRole="Materials" />
+        </EntityType>
+        <EntityType Name="Work_Areas">
+          <Key>
+            <PropertyRef Name="Workshop_code" />
+          </Key>
+          <Property Name="Workshop_code" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="35" FixedLength="false" Unicode="true" />
+          <Property Name="Supervisor" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Type_work" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Orders" Relationship="ТрансмашModel.FK_Orders_Work_Areas1" FromRole="Work_Areas" ToRole="Orders" />
+          <NavigationProperty Name="Templates" Relationship="ТрансмашModel.FK_Templates_Work_Areas" FromRole="Work_Areas" ToRole="Templates" />
+          <NavigationProperty Name="User" Relationship="ТрансмашModel.FK_User_Work_Areas" FromRole="Work_Areas" ToRole="User" />
+          <NavigationProperty Name="Workers" Relationship="ТрансмашModel.FK_Workers_Work_Areas" FromRole="Work_Areas" ToRole="Workers" />
+        </EntityType>
+        <EntityType Name="Workers">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Surname" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Mid_name" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="Pos_work" Type="Int32" />
+          <Property Name="Area_work" Type="Int32" />
+          <Property Name="FIO" Type="String" MaxLength="47" FixedLength="false" Unicode="true" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="Position" Relationship="ТрансмашModel.FK_Workers_Position1" FromRole="Workers" ToRole="Position" />
+          <NavigationProperty Name="Work_Areas" Relationship="ТрансмашModel.FK_Workers_Work_Areas" FromRole="Workers" ToRole="Work_Areas" />
+        </EntityType>
+        <EntityType Name="General_order">
+          <Key>
+            <PropertyRef Name="idMat" />
+          </Key>
+          <Property Name="idMat" Type="Int32" Nullable="false" />
+          <Property Name="Material_num" Type="Int32" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Unit_m" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="Month" Type="Int32" />
+          <Property Name="Year" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Order_view">
+          <Key>
+            <PropertyRef Name="idMat" />
+            <PropertyRef Name="Quantity" />
+          </Key>
+          <Property Name="idMat" Type="Int32" Nullable="false" />
+          <Property Name="Material_num" Type="Int32" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Unit_m" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="Work_cod" Type="Int32" />
+          <Property Name="Month" Type="Int32" />
+          <Property Name="Year" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Purchase_view">
+          <Key>
+            <PropertyRef Name="idMat" />
+          </Key>
+          <Property Name="idMat" Type="Int32" Nullable="false" />
+          <Property Name="Material_num" Type="Int32" />
+          <Property Name="Unit_m" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="Month" Type="Int32" />
+          <Property Name="Year" Type="Int32" />
+        </EntityType>
+        <Association Name="FK_Orders_Materials">
+          <End Type="ТрансмашModel.Materials" Role="Materials" Multiplicity="0..1" />
+          <End Type="ТрансмашModel.Orders" Role="Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Materials">
+              <PropertyRef Name="idMat" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="Material_num" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TOrders_Materials">
+          <End Type="ТрансмашModel.Materials" Role="Materials" Multiplicity="1" />
+          <End Type="ТрансмашModel.TOrders" Role="TOrders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Materials">
+              <PropertyRef Name="idMat" />
+            </Principal>
+            <Dependent Role="TOrders">
+              <PropertyRef Name="Material_num" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Warehouse_Materials1">
+          <End Type="ТрансмашModel.Materials" Role="Materials" Multiplicity="1" />
+          <End Type="ТрансмашModel.Warehouse" Role="Warehouse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Materials">
+              <PropertyRef Name="idMat" />
+            </Principal>
+            <Dependent Role="Warehouse">
+              <PropertyRef Name="Material_cod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Month">
+          <End Type="ТрансмашModel.Month" Role="Month" Multiplicity="0..1" />
+          <End Type="ТрансмашModel.Orders" Role="Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Month">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="Month" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Work_Areas1">
+          <End Type="ТрансмашModel.Work_Areas" Role="Work_Areas" Multiplicity="0..1" />
+          <End Type="ТрансмашModel.Orders" Role="Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Work_Areas">
+              <PropertyRef Name="Workshop_code" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="Work_cod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Workers_Position1">
+          <End Type="ТрансмашModel.Position" Role="Position" Multiplicity="0..1" />
+          <End Type="ТрансмашModel.Workers" Role="Workers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Position">
+              <PropertyRef Name="idPos" />
+            </Principal>
+            <Dependent Role="Workers">
+              <PropertyRef Name="Pos_work" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Templates_Work_Areas">
+          <End Type="ТрансмашModel.Work_Areas" Role="Work_Areas" Multiplicity="1" />
+          <End Type="ТрансмашModel.Templates" Role="Templates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Work_Areas">
+              <PropertyRef Name="Workshop_code" />
+            </Principal>
+            <Dependent Role="Templates">
+              <PropertyRef Name="id_area" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TOrders_Templates">
+          <End Type="ТрансмашModel.Templates" Role="Templates" Multiplicity="1" />
+          <End Type="ТрансмашModel.TOrders" Role="TOrders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Templates">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TOrders">
+              <PropertyRef Name="Temp_num" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Work_Areas">
+          <End Type="ТрансмашModel.Work_Areas" Role="Work_Areas" Multiplicity="0..1" />
+          <End Type="ТрансмашModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Work_Areas">
+              <PropertyRef Name="Workshop_code" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="id_area" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Workers_Work_Areas">
+          <End Type="ТрансмашModel.Work_Areas" Role="Work_Areas" Multiplicity="0..1" />
+          <End Type="ТрансмашModel.Workers" Role="Workers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Work_Areas">
+              <PropertyRef Name="Workshop_code" />
+            </Principal>
+            <Dependent Role="Workers">
+              <PropertyRef Name="Area_work" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ТрансмашModelContainer" CdmEntityContainer="ТрансмашEntities1">
+          <EntitySetMapping Name="Materials">
+            <EntityTypeMapping TypeName="ТрансмашModel.Materials">
+              <MappingFragment StoreEntitySet="Materials">
+                <ScalarProperty Name="Supplier" ColumnName="Supplier" />
+                <ScalarProperty Name="Max_packing" ColumnName="Max_packing" />
+                <ScalarProperty Name="Min_packing" ColumnName="Min_packing" />
+                <ScalarProperty Name="Irreducible_balance" ColumnName="Irreducible_balance" />
+                <ScalarProperty Name="Unit_m" ColumnName="Unit_m" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Material_num" ColumnName="Material_num" />
+                <ScalarProperty Name="idMat" ColumnName="idMat" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Month">
+            <EntityTypeMapping TypeName="ТрансмашModel.Month">
+              <MappingFragment StoreEntitySet="Month">
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="ТрансмашModel.Orders">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Material_num" ColumnName="Material_num" />
+                <ScalarProperty Name="Work_cod" ColumnName="Work_cod" />
+                <ScalarProperty Name="idOrder" ColumnName="idOrder" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Position">
+            <EntityTypeMapping TypeName="ТрансмашModel.Position">
+              <MappingFragment StoreEntitySet="Position">
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="idPos" ColumnName="idPos" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="ТрансмашModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Templates">
+            <EntityTypeMapping TypeName="ТрансмашModel.Templates">
+              <MappingFragment StoreEntitySet="Templates">
+                <ScalarProperty Name="id_area" ColumnName="id_area" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TOrders">
+            <EntityTypeMapping TypeName="ТрансмашModel.TOrders">
+              <MappingFragment StoreEntitySet="TOrders">
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Material_num" ColumnName="Material_num" />
+                <ScalarProperty Name="Temp_num" ColumnName="Temp_num" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="ТрансмашModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="id_area" ColumnName="id_area" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="idUsers" ColumnName="idUsers" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Warehouse">
+            <EntityTypeMapping TypeName="ТрансмашModel.Warehouse">
+              <MappingFragment StoreEntitySet="Warehouse">
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Material_cod" ColumnName="Material_cod" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Work_Areas">
+            <EntityTypeMapping TypeName="ТрансмашModel.Work_Areas">
+              <MappingFragment StoreEntitySet="Work_Areas">
+                <ScalarProperty Name="Type_work" ColumnName="Type_work" />
+                <ScalarProperty Name="Supervisor" ColumnName="Supervisor" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Workshop_code" ColumnName="Workshop_code" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Workers">
+            <EntityTypeMapping TypeName="ТрансмашModel.Workers">
+              <MappingFragment StoreEntitySet="Workers">
+                <ScalarProperty Name="FIO" ColumnName="FIO" />
+                <ScalarProperty Name="Area_work" ColumnName="Area_work" />
+                <ScalarProperty Name="Pos_work" ColumnName="Pos_work" />
+                <ScalarProperty Name="Mid_name" ColumnName="Mid_name" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="General_order">
+            <EntityTypeMapping TypeName="ТрансмашModel.General_order">
+              <MappingFragment StoreEntitySet="General_order">
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Unit_m" ColumnName="Unit_m" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Material_num" ColumnName="Material_num" />
+                <ScalarProperty Name="idMat" ColumnName="idMat" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Order_view">
+            <EntityTypeMapping TypeName="ТрансмашModel.Order_view">
+              <MappingFragment StoreEntitySet="Order_view">
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="Work_cod" ColumnName="Work_cod" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Unit_m" ColumnName="Unit_m" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Material_num" ColumnName="Material_num" />
+                <ScalarProperty Name="idMat" ColumnName="idMat" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Purchase_view">
+            <EntityTypeMapping TypeName="ТрансмашModel.Purchase_view">
+              <MappingFragment StoreEntitySet="Purchase_view">
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Unit_m" ColumnName="Unit_m" />
+                <ScalarProperty Name="Material_num" ColumnName="Material_num" />
+                <ScalarProperty Name="idMat" ColumnName="idMat" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

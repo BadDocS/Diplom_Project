@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3d6f87c594ba44c2a5abad4e343816f8" Name="Diagram1" ZoomLevel="66">
+        <EntityTypeShape EntityType="ТрансмашModel.Materials" Width="1.5" PointX="0.75" PointY="10" />
+        <EntityTypeShape EntityType="ТрансмашModel.Month" Width="1.5" PointX="0.75" PointY="3.625" />
+        <EntityTypeShape EntityType="ТрансмашModel.Orders" Width="1.5" PointX="3" PointY="6" />
+        <EntityTypeShape EntityType="ТрансмашModel.Position" Width="1.5" PointX="3.75" PointY="3.625" />
+        <EntityTypeShape EntityType="ТрансмашModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ТрансмашModel.Templates" Width="1.5" PointX="3" PointY="14.75" />
+        <EntityTypeShape EntityType="ТрансмашModel.TOrders" Width="1.5" PointX="5.25" PointY="14.625" />
+        <EntityTypeShape EntityType="ТрансмашModel.User" Width="1.5" PointX="3" PointY="12" />
+        <EntityTypeShape EntityType="ТрансмашModel.Warehouse" Width="1.5" PointX="3" PointY="17.625" />
+        <EntityTypeShape EntityType="ТрансмашModel.Work_Areas" Width="1.5" PointX="0.75" PointY="6.125" />
+        <EntityTypeShape EntityType="ТрансмашModel.Workers" Width="1.5" PointX="6" PointY="6" />
+        <EntityTypeShape EntityType="ТрансмашModel.General_order" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ТрансмашModel.Order_view" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ТрансмашModel.Purchase_view" Width="1.5" PointX="8.75" PointY="4.75" />
+        <AssociationConnector Association="ТрансмашModel.FK_Orders_Materials" />
+        <AssociationConnector Association="ТрансмашModel.FK_TOrders_Materials" />
+        <AssociationConnector Association="ТрансмашModel.FK_Warehouse_Materials1" />
+        <AssociationConnector Association="ТрансмашModel.FK_Orders_Month" />
+        <AssociationConnector Association="ТрансмашModel.FK_Orders_Work_Areas1" />
+        <AssociationConnector Association="ТрансмашModel.FK_Workers_Position1" />
+        <AssociationConnector Association="ТрансмашModel.FK_Templates_Work_Areas" />
+        <AssociationConnector Association="ТрансмашModel.FK_TOrders_Templates" />
+        <AssociationConnector Association="ТрансмашModel.FK_User_Work_Areas" />
+        <AssociationConnector Association="ТрансмашModel.FK_Workers_Work_Areas" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
